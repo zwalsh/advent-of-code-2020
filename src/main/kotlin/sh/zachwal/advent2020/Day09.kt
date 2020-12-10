@@ -37,4 +37,26 @@ class Day09 {
         }
         return 0
     }
+
+    /*
+    O(n) solution that adds to the end while too small & subtracts from the start while too big
+    until it finds the correct range
+     */
+    fun contiguousSumOneActiveSet(stream: List<Long>, windowSize: Int = 25): Long {
+        val targetSum = firstNotMatching(stream, windowSize)
+        var startIdx = 0
+        var endIdx = 1
+        var curSum = stream[startIdx] + stream[endIdx]
+        while (curSum != targetSum) {
+            if (curSum < targetSum) {
+                endIdx += 1
+                curSum += stream[endIdx]
+            } else if (curSum > targetSum) {
+                curSum -= stream[startIdx]
+                startIdx += 1
+            }
+        }
+        val contiguousSection = stream.subList(startIdx, endIdx + 1)
+        return contiguousSection.minOrNull()!! + contiguousSection.maxOrNull()!!
+    }
 }

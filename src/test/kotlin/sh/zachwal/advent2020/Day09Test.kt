@@ -35,6 +35,6 @@ internal class Day09Test {
 
     @Test
     fun `can find contiguous set summing to target`() {
-        assertEquals(62, day09.contiguousSumMatchingMissing(exampleStream, 5))
+        assertEquals(62, day09.contiguousSumOneActiveSet(exampleStream, 5))
     }
 }
